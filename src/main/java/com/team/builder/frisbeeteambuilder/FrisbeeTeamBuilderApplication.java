@@ -6,8 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class FrisbeeTeamBuilderApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(FrisbeeTeamBuilderApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(FrisbeeTeamBuilderApplication.class, args);
+    }
 
 }
