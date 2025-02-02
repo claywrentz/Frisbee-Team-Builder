@@ -1,4 +1,4 @@
-package com.team.builder.frisbeeteambuilder.model;
+package com.team.builder.frisbeeteambuilder.model.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

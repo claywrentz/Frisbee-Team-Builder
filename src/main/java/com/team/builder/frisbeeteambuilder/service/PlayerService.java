@@ -1,27 +1,34 @@
 package com.team.builder.frisbeeteambuilder.service;
 
-import com.team.builder.frisbeeteambuilder.model.Player;
+import com.team.builder.frisbeeteambuilder.model.entities.Player;
 import com.team.builder.frisbeeteambuilder.repository.PlayerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class PlayerService {
 
+    private final PlayerRepo playerRepo;
+
     @Autowired
-    PlayerRepo playerRepo;
-
-    List<Player> players = new ArrayList<>(Arrays.asList(new Player(), new Player()));
-
-    public List<Player> getPlayers() {
-        return players;
+    PlayerService(final PlayerRepo playerRepo) {
+        this.playerRepo = playerRepo;
     }
 
-    public void save(Player player) {
-        playerRepo.save(player);
+    public List<Player> getPlayers() {
+        return playerRepo.findAll();
+    }
+
+    public void save(List<Player> players) {
+        playerRepo.saveAll(players);
+    }
+
+    public void update(Integer pid, Player changePlayer) {
+        Player oldPlayer = playerRepo.getReferenceById(pid);
+        oldPlayer.setName(changePlayer.getName());
+        oldPlayer.setSex(changePlayer.getSex());
+        playerRepo.save(oldPlayer);
     }
 }

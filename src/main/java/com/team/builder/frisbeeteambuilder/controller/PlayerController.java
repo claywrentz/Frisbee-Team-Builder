@@ -1,29 +1,34 @@
 package com.team.builder.frisbeeteambuilder.controller;
 
-import com.team.builder.frisbeeteambuilder.model.Player;
+import com.team.builder.frisbeeteambuilder.model.entities.Player;
 import com.team.builder.frisbeeteambuilder.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 public class PlayerController {
 
+    private final PlayerService playerService;
+
     @Autowired
-    PlayerService playerService;
+    PlayerController(final PlayerService playerService) {
+        this.playerService = playerService;
+    }
 
     @GetMapping("/players")
     public List<Player> getPlayer() {
         return playerService.getPlayers();
     }
 
-    @PostMapping("/player")
-    public void addPlayer(@RequestBody Player player) {
-        playerService.save(player);
+    @PostMapping("/players")
+    public void addPlayer(@RequestBody List<Player> players) { playerService.save(players); }
+
+    @PutMapping("/player/{pid}")
+    public void updatePlayer(@PathVariable Integer pid, @RequestBody Player player) {
+        //need to enforce not being able to post
+        playerService.update(pid, player);
     }
 
 }
