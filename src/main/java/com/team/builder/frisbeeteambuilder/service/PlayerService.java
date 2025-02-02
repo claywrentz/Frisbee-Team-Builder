@@ -31,4 +31,8 @@ public class PlayerService {
         oldPlayer.setSex(changePlayer.getSex());
         playerRepo.save(oldPlayer);
     }
+
+    public void delete(Integer pid) {
+        playerRepo.deleteById(pid);
+    }
 }

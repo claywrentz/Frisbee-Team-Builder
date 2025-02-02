@@ -31,4 +31,9 @@ public class PlayerController {
         playerService.update(pid, player);
     }
 
+    @DeleteMapping("/player/{pid}")
+    public void deletePlayer(@PathVariable Integer pid) {
+        playerService.delete(pid);
+    }
+
 }
