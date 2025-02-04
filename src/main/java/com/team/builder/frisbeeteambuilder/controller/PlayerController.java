@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 public class PlayerController {
 
@@ -18,12 +19,12 @@ public class PlayerController {
     }
 
     @GetMapping("/players")
-    public List<Player> getPlayer() {
+    public List<Player> getPlayers() {
         return playerService.getPlayers();
     }
 
     @PostMapping("/players")
-    public void addPlayer(@RequestBody List<Player> players) { playerService.save(players); }
+    public void addPlayers(@RequestBody List<Player> players) { playerService.save(players); }
 
     @PutMapping("/player/{pid}")
     public void updatePlayer(@PathVariable Integer pid, @RequestBody Player player) {

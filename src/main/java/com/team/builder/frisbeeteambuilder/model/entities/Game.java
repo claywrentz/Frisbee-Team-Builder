@@ -1,14 +1,12 @@
 package com.team.builder.frisbeeteambuilder.model.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -21,9 +19,20 @@ public class Game {
     private Integer gameID;
     private Date date;
     private Integer field;
-    private Integer winningTeamID;
+    @ManyToOne
+    @JoinColumn(name = "winning_team_id")
+    private Team winningTeam;
     private Integer winningTeamPoints;
-    private Integer losingTeamID;
+    @ManyToOne
+    @JoinColumn(name = "losing_team_id")
+    private Team losingTeam;
     private Integer losingTeamPoints;
+    @ManyToMany
+    @JoinTable(
+            name = "game_team",
+            joinColumns = @JoinColumn(name = "game_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id")
+    )
+    List<Team> gameTeams;
 
 }

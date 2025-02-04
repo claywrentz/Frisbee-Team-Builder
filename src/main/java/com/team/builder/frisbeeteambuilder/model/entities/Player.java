@@ -19,8 +19,11 @@ public class Player {
     private String name;
     private String sex;
     @ManyToMany
-    private List<Game> games;
-    @ManyToMany
-    private List<Team> teams;
+    @JoinTable(
+            name = "player_team",
+            joinColumns = @JoinColumn(name = "player_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id")
+    )
+    private List<Team> playerTeams;
 
 }
